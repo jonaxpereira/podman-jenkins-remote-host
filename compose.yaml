@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  jenkins:
+    container_name: jenkins
+    image: docker.io/jenkins/jenkins:lts-jdk11
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+    networks:
+      - net
+  remote_host:
+    container_name: remote-host
+    image: remote-host
+    build:
+      context: ./centos
+    networks:
+      - net
+networks:
+  net:
